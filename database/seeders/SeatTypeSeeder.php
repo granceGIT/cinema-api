@@ -16,10 +16,15 @@ class SeatTypeSeeder extends Seeder
         DB::table('seat_types')->insert([
             [
                 'name'=>'Стандарт',
+                'price_ratio'=>1,
+                'created_at'=>now(),
+                'updated_at'=>now(),
             ],
             [
                 'name'=>'Эконом',
-                'price_ratio'=>0.9
+                'price_ratio'=>0.9,
+                'created_at'=>now(),
+                'updated_at'=>now(),
             ],
         ]);
     }

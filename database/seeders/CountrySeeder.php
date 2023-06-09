@@ -15,22 +15,34 @@ class CountrySeeder extends Seeder
     {
         DB::table('countries')->insert([
             [
-                'name'=>'Россия',
+                'name' => 'Россия',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'США',
+                'name' => 'США',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Германия',
+                'name' => 'Германия',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Франция',
+                'name' => 'Франция',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Великобритания',
+                'name' => 'Великобритания',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Испания',
+                'name' => 'Испания',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

@@ -15,13 +15,19 @@ class StatusSeeder extends Seeder
     {
         DB::table('statuses')->insert([
             [
-                'name'=>'Новый'
+                'name' => 'Новый',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Оплачен'
+                'name' => 'Оплачен',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Отменен'
+                'name' => 'Отменен',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

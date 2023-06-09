@@ -15,11 +15,16 @@ class TicketTypeSeeder extends Seeder
     {
         DB::table('ticket_types')->insert([
             [
-                'name'=>'Взрослый'
+                'name'=>'Взрослый',
+                'price_ratio'=>1,
+                'created_at'=>now(),
+                'updated_at'=>now(),
             ],
             [
                 'name'=>'Детский',
                 'price_ratio'=>0.9,
+                'created_at'=>now(),
+                'updated_at'=>now(),
             ],
         ]);
     }

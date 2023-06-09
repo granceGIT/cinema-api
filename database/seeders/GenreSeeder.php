@@ -15,28 +15,44 @@ class GenreSeeder extends Seeder
     {
         DB::table('genres')->insert([
             [
-                'name'=>'Триллер'
+                'name' => 'Триллер',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Драма'
+                'name' => 'Драма',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Криминал'
+                'name' => 'Криминал',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Комедия'
+                'name' => 'Комедия',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Приключения'
+                'name' => 'Приключения',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Фентези'
+                'name' => 'Фентези',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Фантастика'
+                'name' => 'Фантастика',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Семейный'
+                'name' => 'Семейный',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

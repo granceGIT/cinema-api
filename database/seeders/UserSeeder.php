@@ -16,15 +16,20 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name'=>'user',
-                'phone'=>'89000000000',
-                'password'=>Hash::make('password'),
+                'name' => 'user',
+                'phone_number' => '89000000000',
+                'password' => Hash::make('password'),
+                'role_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'admin',
-                'phone'=>'89999999999',
-                'password'=>Hash::make('password'),
-                'role_id'=>2,
+                'name' => 'admin',
+                'phone_number' => '89999999999',
+                'password' => Hash::make('password'),
+                'role_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

@@ -15,24 +15,34 @@ class DirectorSeeder extends Seeder
     {
         DB::table('directors')->insert([
             [
-                'name'=>'Кристофер',
-                'surname'=>'Нолан',
+                'name' => 'Кристофер',
+                'surname' => 'Нолан',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Джеймс',
-                'surname'=>'Кэмерон',
+                'name' => 'Джеймс',
+                'surname' => 'Кэмерон',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Дэвид',
-                'surname'=>'Йетс',
+                'name' => 'Дэвид',
+                'surname' => 'Йетс',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Рон',
-                'surname'=>'Ховард',
+                'name' => 'Рон',
+                'surname' => 'Ховард',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Джордж',
-                'surname'=>'Лукас',
+                'name' => 'Джордж',
+                'surname' => 'Лукас',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

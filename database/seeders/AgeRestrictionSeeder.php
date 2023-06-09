@@ -15,19 +15,29 @@ class AgeRestrictionSeeder extends Seeder
     {
         DB::table('age_restrictions')->insert([
             [
-                'age'=>0,
+                'age' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'age'=>6,
+                'age' => 6,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'age'=>12,
+                'age' => 12,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'age'=>16,
+                'age' => 16,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'age'=>18,
+                'age' => 18,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

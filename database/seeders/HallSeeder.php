@@ -15,16 +15,24 @@ class HallSeeder extends Seeder
     {
         DB::table('halls')->insert([
             [
-                'name'=>'Зал №1',
+                'name' => 'Зал №1',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Зал №2',
+                'name' => 'Зал №2',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Зал №3',
+                'name' => 'Зал №3',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name'=>'Зал №4',
+                'name' => 'Зал №4',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

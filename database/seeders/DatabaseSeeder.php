@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Seat;
+use Database\Factories\SeatFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +26,10 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             DirectorSeeder::class,
             AgeRestrictionSeeder::class,
+            FilmSeeder::class,
+            ShowingSeeder::class,
+            SeatSeeder::class,
         ]);
+
     }
 }

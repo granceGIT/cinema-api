@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->date('release_date');
+            $table->integer('duration')->nullable();
+            $table->integer('release_date');
 
             $table->foreignId('age_restriction_id')->constrained('age_restrictions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('director_id')->constrained('directors')->cascadeOnDelete()->cascadeOnUpdate();
