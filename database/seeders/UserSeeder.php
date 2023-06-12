@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'user',
                 'phone_number' => '89000000000',
-                'password' => Hash::make('password'),
+                'password' => 'password',
+                'password_hashed' => Hash::make('password'),
                 'role_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -26,7 +27,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'admin',
                 'phone_number' => '89999999999',
-                'password' => Hash::make('password'),
+                'password' => 'password',
+                'password_hashed' => Hash::make('password'),
                 'role_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),

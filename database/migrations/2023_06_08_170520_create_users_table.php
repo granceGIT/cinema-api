@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone_number');
             $table->string('password');
+            $table->string('password_hashed');
+            $table->string('api_token');
 
             $table->foreignId('role_id')->default(1)->constrained('roles','id')->cascadeOnDelete()->cascadeOnUpdate();
 

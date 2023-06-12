@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -19,8 +21,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'phone_number',
         'password',
+        'password_hashed',
+        'api_token',
     ];
 
     /**
@@ -30,16 +34,16 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function generateToken()
+    {
+        $this->update(['api_token'=>Hash::make(Str::random())]);
+        return $this->api_token;
+    }
+
+    public function resetToken()
+    {
+        return $this->update(['api_token'=>null]);
+    }
 }

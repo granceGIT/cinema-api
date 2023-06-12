@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Laravel\Sanctum\Exceptions\MissingAbilityException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +29,22 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->renderable(function(AuthenticationException $e,Request $request){
+            if ($request->is('api/*')){
+                throw new ApiException(403,'Login failed');
+            }
+        });
+
+
+        // for sanctum
+        $this->renderable(function(MissingAbilityException $e,Request $request){
+            if ($request->is('api/*')){
+                throw new ApiException(403,'Forbidden for you');
+            }
+        });
+
     }
+
+
 }
