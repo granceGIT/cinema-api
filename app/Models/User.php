@@ -46,4 +46,16 @@ class User extends Authenticatable
     {
         return $this->update(['api_token'=>null]);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
 }

@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     use HasFactory;
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'laravel_through_key',
+    ];
+
+    protected $fillable =[
+        'order_id',
+        'seat_id',
+        'ticket_type_id',
+    ];
+
+    public function type()
+    {
+        return $this->belongsTo(TicketType::class,'ticket_type_id');
+    }
+
+    public function seat()
+    {
+        return $this->belongsTo(Seat::class);
+    }
 }

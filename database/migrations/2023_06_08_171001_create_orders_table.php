@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('price');
 
             $table->foreignId('status_id')->default(1)->constrained('statuses')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('showing_id')->constrained('showings')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
