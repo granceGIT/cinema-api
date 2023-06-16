@@ -64,6 +64,7 @@ class UserController extends Controller
         return JSONHelper::response([
             'active'=> OrderResource::collection($orders->whereDate('created_at','>=',now())->get()),
             'previous'=> OrderResource::collection($orders->whereDate('created_at','<=',now())->get()),
+            //asd
         ]);
     }
 
