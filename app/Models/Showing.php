@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Http\JSONHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 
 class Showing extends Model
 {
@@ -29,6 +31,20 @@ class Showing extends Model
             $item->is_occupied=!$freeSeats->contains($item->id);
             return $item;
         });
+    }
+
+    public static function popularLastWeek()
+    {
+        $popularShowings = DB::table('orders')
+            ->selectRaw('showing_id, count(tickets.id) as ticket_count')
+            ->where('orders.created_at','>',now()->subWeek())
+            ->join('tickets','orders.id','=','tickets.order_id')
+            ->groupByRaw('showing_id');
+        $showings = DB::table('showings')
+            ->joinSub($popularShowings,'popular_showings',function(JoinClause $join){
+                $join->on('showings.id','=','popular_showings.showing_id');})
+            ->orderBy('popular_showings.ticket_count','desc');
+        return $showings;
     }
 
     public function hall()

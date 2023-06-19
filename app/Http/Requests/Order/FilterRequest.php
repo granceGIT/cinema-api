@@ -9,7 +9,8 @@ class FilterRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'status_id'=>'sometimes'
+            'status_id'=>'sometimes',
+            'user_id'=>'sometimes'
         ];
     }
 }

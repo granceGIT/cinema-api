@@ -16,6 +16,11 @@ class Order extends Model
         'user_id',
     ];
 
+    protected $attributes = [
+        'status_id'=>1,
+        'price'=>0,
+    ];
+
     public function status()
     {
         return $this->belongsTo(Status::class);

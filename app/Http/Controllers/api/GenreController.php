@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    public function films(Genre $genre, Request $request)
+    public function films(Genre $genre)
     {
         return FilmResource::collection($genre->films);
     }

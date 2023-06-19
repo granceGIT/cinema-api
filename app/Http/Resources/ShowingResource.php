@@ -21,7 +21,6 @@ class ShowingResource extends JsonResource
             'start_time'=>$this->start_time,
             'end_time'=>$this->end_time,
             'film'=>new FilmShowingResource($this->film),
-            'tickets'=>TicketResource::collection($this->tickets),
         ];
     }
 }

@@ -17,11 +17,4 @@ class ApiRequest extends FormRequest
     {
         throw new ApiException(errors: $validator->errors());
     }
-
-    public function messages()
-    {
-        $messages = parent::messages();
-        $messages+=['required'=>'The :attribute cannot be blank.','exists'=>'The :attribute does not exist.'];
-        return $messages;
-    }
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\ApiRequest;
-use App\Models\Showing;
-use Illuminate\Validation\Rule;
 
 class CheckoutRequest extends ApiRequest
 {

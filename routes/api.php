@@ -10,10 +10,12 @@ Route::controller(\App\Http\Controllers\api\UserController::class)->group(functi
 
 Route::controller(\App\Http\Controllers\api\FilmController::class)->group(function(){
     Route::get('/films','index');
+    Route::get('/films/{film}','show');
 });
 
 Route::controller(\App\Http\Controllers\api\ShowingController::class)->group(function(){
     Route::get('/showings','index');
+    Route::get('/showings/popular','popular');
     Route::get('/showings/{showing}/seats/free','freeSeatsCount');
     Route::get('/showings/{showing}/seats','seats');
 });
@@ -32,7 +34,7 @@ Route::middleware('auth:api')->group(function(){
         Route::get('/logout','logout');
         Route::get('/profile','profile');
         Route::get('/orders','orders');
-        Route::post('/orders/create','checkout');
+        Route::post('/orders/create','checkoutTransaction');
         Route::post('/films/{film}/rate','rate');
 
     });
