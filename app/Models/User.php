@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,4 +46,28 @@ class User extends Authenticatable
     {
         return $this->update(['api_token'=>null]);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function ordersByShowingDate($operator,$date)
+    {
+        return $this->orders()->withWhereHas('showing', function (Builder $query) use ($operator,$date) {
+            $query->where('date', $operator, $date);
+        });
+    }
+
+    public function rates()
+    {
+        return $this->belongsToMany(Film::class,'film_rating')->withPivot('rate');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
 }

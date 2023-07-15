@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShowingFilmResource extends JsonResource
+class OrderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,13 @@ class ShowingFilmResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'date'=>$this->date,
-            'start_time'=>$this->start_time,
-            'end_time'=>$this->end_time,
-            'hall'=>$this->hall->name,
+            'tickets_count'=>$this->tickets->count(),
+            'tickets_children_count'=>$this->tickets()->where('ticket_type_id',2)->get()->count(),
+            'price'=>$this->price,
+            'status'=>$this->status->name,
+            'showing'=>new ShowingResource($this->showing),
         ];
     }
+
+
 }

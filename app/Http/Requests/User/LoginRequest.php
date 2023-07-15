@@ -3,7 +3,6 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\ApiRequest;
-use App\Models\User;
 
 class LoginRequest extends ApiRequest
 {
@@ -12,6 +11,14 @@ class LoginRequest extends ApiRequest
         return [
             'phone_number'=>'required|string',
             'password'=>'required|string',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'password'=>'пароль',
+            'phone_number'=>'номер телефона'
         ];
     }
 }

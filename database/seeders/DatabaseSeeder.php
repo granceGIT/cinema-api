@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
             FilmSeeder::class,
             ShowingSeeder::class,
             SeatSeeder::class,
+            ActorFilmSeeder::class,
+            FilmGenreSeeder::class,
+            FilmRatingSeeder::class,
         ]);
 
     }
