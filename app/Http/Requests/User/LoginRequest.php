@@ -13,4 +13,12 @@ class LoginRequest extends ApiRequest
             'password'=>'required|string',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'password'=>'пароль',
+            'phone_number'=>'номер телефона'
+        ];
+    }
 }

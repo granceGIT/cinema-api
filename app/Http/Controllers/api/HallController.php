@@ -6,15 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\JSONHelper;
 use App\Http\Resources\FilmResource;
 use App\Models\Hall;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class HallController extends Controller
 {
     public function index()
     {
-        return JSONHelper::response(Hall::with(['images'=>function(Builder $query){
-            $query->limit(1);
-        }]));
+        return JSONHelper::response(Hall::with('images')->get());
     }
 
     public function films(Hall $hall)

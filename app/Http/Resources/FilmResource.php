@@ -19,11 +19,17 @@ class FilmResource extends JsonResource
             'name'=>$this->name,
             'release_date'=>$this->release_date,
             'duration'=>$this->duration,
+            'description'=>$this->description,
+            'rating'=>$this->rating(),
             'director'=>"{$this->director->name} {$this->director->surname}",
+            'country'=>$this->country->name,
             'age_restriction'=>$this->age_restriction->age,
             'genres'=>$this->genres,
-            'actors'=>$this->actors,
-            'showings'=>ShowingFilmResource::collection($this->showings),
+            'actors'=>ActorResource::collection($this->actors),
+            'images'=>$this->images,
+            'rate'=>$this->whenPivotLoaded('film_rating', function () {
+                return $this->pivot->rate;
+            }),
         ];
     }
 }

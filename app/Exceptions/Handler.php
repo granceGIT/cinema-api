@@ -2,10 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Http\JSONHelper;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\Exceptions\MissingAbilityException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,21 +28,22 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
-
         $this->renderable(function(AuthenticationException $e,Request $request){
             if ($request->is('api/*')){
-                throw new ApiException(403,'Login failed');
+                throw new ApiException(403,'Ошибка авторизации');
             }
         });
 
+        $this->renderable(function(NotFoundHttpException $e,Request $request){
+            if ($request->is('api/*')){
+                throw new ApiException(404,$e->getMessage());
+            }
+        });
 
         // for sanctum
         $this->renderable(function(MissingAbilityException $e,Request $request){
             if ($request->is('api/*')){
-                throw new ApiException(403,'Forbidden for you');
+                throw new ApiException(403,'У вас нет доступа');
             }
         });
 

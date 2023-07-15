@@ -10,8 +10,10 @@ use App\Http\Requests\User\CheckoutRequest;
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\RateFilmRequest;
 use App\Http\Requests\User\RegisterRequest;
+use App\Http\Resources\FilmResource;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\UserResource;
+use App\Models\Film;
 use App\Models\Order;
 use App\Models\Showing;
 use App\Models\Ticket;
@@ -28,7 +30,7 @@ class UserController extends Controller
         if ($user = User::where([['phone_number', $request->phone_number], ['password', $request->password]])->first()) {
             return JSONHelper::response(['token' => $user->generateToken()]);
         }
-        throw new ApiException(401, 'Authentication failed.');
+        throw new ApiException(401, 'Неверные данные');
     }
 
     public function register(RegisterRequest $request)
@@ -67,42 +69,6 @@ class UserController extends Controller
     public function checkout(CheckoutRequest $request)
     {
         $price = 0;
-        $showing = Showing::find($request->showing_id);
-        $freeSeats = $showing->freeSeats()->pluck('id');
-
-        foreach ($request->tickets as $ticket) {
-            if (!$freeSeats->contains($ticket['seat_id'])) {
-                throw new ApiException(409,"Seat {$ticket['seat_id']} is occupied.");
-            }
-        }
-
-        $order = Order::create([
-            'showing_id' => $request->showing_id,
-            'user_id' => $request->user()->id,
-            'price' => 0,
-        ]);
-
-        foreach ($request->tickets as $ticket) {
-            Ticket::create([
-                'seat_id' => $ticket['seat_id'],
-                'order_id' => $order->id,
-                'ticket_type_id' => $ticket['ticket_type_id'],
-            ]);
-            $ticketType = TicketType::find($ticket['ticket_type_id']);
-            $price += $showing->base_price * $ticketType->price_ratio;
-        }
-
-        $order->update(['price' => $price]);
-
-        return new OrderResource($order);
-    }
-
-
-    //showing_id в таблице tickets позволил бы установить unique на два поля, по которым можно было бы определить свободно ли место
-    //что значительно упростило бы работу
-    public function checkoutTransaction(CheckoutRequest $request)
-    {
-        $price = 0;
         $showing = Showing::findOrFail($request->showing_id);
         $freeSeats = $showing->freeSeats()->pluck('id');
 
@@ -115,7 +81,7 @@ class UserController extends Controller
 
             foreach ($request->tickets as $ticket) {
                 if ($freeSeats->doesntContain($ticket['seat_id'])) {
-                    throw new ApiException(409,"Seat {$ticket['seat_id']} is occupied.");
+                    throw new ApiException(400,"Место с кодом {$ticket['seat_id']} не существует в этом зале или занято.");
                 }
 
                 Ticket::create([
@@ -138,11 +104,15 @@ class UserController extends Controller
         return new OrderResource($order);
     }
 
-    public function rate(RateFilmRequest $request)
+    public function rate(Film $film,RateFilmRequest $request)
     {
         $user = $request->user();
-        if ($user->orders()->with('showing.film')->get()->pluck('showing.film.id')) {
+        if ($user->rates->contains($film)){
+            $user->rates()->updateExistingPivot($film,['rate'=>$request->rate]);
         }
-
+        else{
+            $user->rates()->attach($film->id,['rate'=>$request->rate]);
+        }
+        return new FilmResource($user->rates()->where('film_id',$film->id)->first());
     }
 }

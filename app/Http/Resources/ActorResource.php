@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FilmShowingResource extends JsonResource
+class ActorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,11 @@ class FilmShowingResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'duration'=>$this->duration,
-            'country'=>$this->country->name,
-            'director'=>"{$this->director->name} {$this->director->surname}",
-            'genres'=>$this->genres,
+            'surname'=>$this->surname,
+            'gender'=>$this->gender,
+            'role'=>$this->whenPivotLoaded('actor_film', function () {
+                return $this->pivot->role;
+            }),
         ];
     }
 }

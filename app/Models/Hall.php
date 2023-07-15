@@ -24,8 +24,8 @@ class Hall extends Model
         return $this->hasMany(Seat::class);
     }
 
-    public function ()
+    public function images()
     {
-        
+        return $this->morphMany(Image::class,'imageable');
     }
 }

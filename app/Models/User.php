@@ -59,6 +59,11 @@ class User extends Authenticatable
         });
     }
 
+    public function rates()
+    {
+        return $this->belongsToMany(Film::class,'film_rating')->withPivot('rate');
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

@@ -9,23 +9,21 @@ use App\Http\Resources\SeatResource;
 use App\Http\Resources\ShowingResource;
 use App\Models\Showing;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ShowingController extends Controller
 {
     public function index(FilterRequest $request)
     {
+//        if($request->search){
+//            $showings = Showing::withWhereHas('film',function(Builder $query) use($request){
+//                $query->where('name','like',"%{$request->search}%");
+//            });
+//        }
         $showings = Showing::orderBy('id');
         foreach ($request->validated() as $k => $v) {
             $showings->where($k, $v);
         }
         return ShowingResource::collection(($showings->get()));
-    }
-
-    public function popular()
-    {
-        return Showing::popularLastWeek()->where('date','>',now())->get();
     }
 
     public function freeSeatsCount(Showing $showing)

@@ -12,4 +12,11 @@ class RateFilmRequest extends FormRequest
             'rate'=>['required','between:1,10']
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'rate'=>'оценка'
+        ];
+    }
 }

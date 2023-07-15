@@ -14,4 +14,13 @@ class RegisterRequest extends ApiRequest
             'password'=>['required','string'],
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name'=>'имя',
+            'phone_number'=>'номер телефона',
+            'password'=>'пароль',
+        ];
+    }
 }

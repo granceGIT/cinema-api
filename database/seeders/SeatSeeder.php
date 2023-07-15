@@ -23,7 +23,7 @@ class SeatSeeder extends Seeder
                         'hall_id'=>$h,
                         'seat_row'=>$i,
                         'seat_number'=>$k,
-                        'seat_type_id'=>$i<3 ? 1 : 2,
+                        'seat_type_id'=>$i>2 ? 1 : 2,
                         'created_at'=>now(),
                         'updated_at'=>now(),
                     ];

@@ -20,7 +20,7 @@ class ShowingResource extends JsonResource
             'date'=>$this->date,
             'start_time'=>$this->start_time,
             'end_time'=>$this->end_time,
-            'film'=>new FilmShowingResource($this->film),
+            'film'=>new FilmResource($this->film),
         ];
     }
 }
