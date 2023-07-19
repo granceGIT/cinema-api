@@ -12,7 +12,7 @@ class Film extends Model
 {
     use HasFactory;
 
-    public static function upcomming()
+    public static function upcoming()
     {
         return Film::withWhereHas(
             'showings', function (Builder $query) {
@@ -36,6 +36,11 @@ class Film extends Model
             ->groupBy('film_id')
             ->orderBy('tickets', 'desc')
             ->join('films', 'films.id', '=', 'film_id');
+    }
+
+    public function upcomingShowings()
+    {
+        return $this->showings()->where('date','>=',now());
     }
 
     public function rating()

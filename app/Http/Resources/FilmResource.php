@@ -21,15 +21,13 @@ class FilmResource extends JsonResource
             'duration'=>$this->duration,
             'description'=>$this->description,
             'rating'=>$this->rating(),
+            'min_price'=>$this->upcomingShowings()->min('base_price'),
             'director'=>"{$this->director->name} {$this->director->surname}",
             'country'=>$this->country->name,
             'age_restriction'=>$this->age_restriction->age,
             'genres'=>$this->genres,
             'actors'=>ActorResource::collection($this->actors),
             'images'=>$this->images,
-            'rate'=>$this->whenPivotLoaded('film_rating', function () {
-                return $this->pivot->rate;
-            }),
         ];
     }
 }

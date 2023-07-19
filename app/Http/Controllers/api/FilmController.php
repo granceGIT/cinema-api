@@ -5,14 +5,16 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Film\FilterRequest;
 use App\Http\Resources\FilmResource;
+use App\Http\Resources\FilmShowingsResource;
 use App\Models\Film;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
     public function index(FilterRequest $request)
     {
-        $films = Film::upcomming();
+        $films = Film::upcoming();
         if ($request->genres){
             $films->whereHas('genres',function(Builder $query) use ($request){
                 $query->whereIn('genre_id',$request->genres);
@@ -47,5 +49,11 @@ class FilmController extends Controller
     public function show(Film $film)
     {
         return new FilmResource($film);
+    }
+
+    public function showings(Film $film)
+    {
+        $showings = $film->upcomingShowings()->get();
+        return FilmShowingsResource::collection($showings);
     }
 }

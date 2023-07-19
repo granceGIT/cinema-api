@@ -19,6 +19,8 @@ class UserResource extends JsonResource
             'name'=>$this->name,
             'phone_number'=>$this->phone_number,
             'role'=>$this->role->name,
+            'orders_count'=>$this->orders->count(),
+            'rates_count'=>$this->rates->count(),
         ];
     }
 }

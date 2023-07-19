@@ -12,6 +12,7 @@ Route::controller(\App\Http\Controllers\api\FilmController::class)->group(functi
     Route::get('/films','index');
     Route::get('/films/popular','popular');
     Route::get('/films/latest','latest');
+    Route::get('/films/{film}/showings','showings');
     Route::get('/films/{film}','show');
 });
 
