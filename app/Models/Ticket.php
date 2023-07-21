@@ -18,13 +18,7 @@ class Ticket extends Model
     protected $fillable =[
         'order_id',
         'seat_id',
-        'ticket_type_id',
     ];
-
-    public function type()
-    {
-        return $this->belongsTo(TicketType::class,'ticket_type_id');
-    }
 
     public function seat()
     {

@@ -16,7 +16,7 @@ class SeatSeeder extends Seeder
     {
         $seats = [];
 
-        for ($h=1;$h<=2;$h++){
+        for ($h=1;$h<=4;$h++){
             for ($i=1;$i<=5;$i++){
                 for ($k=1;$k<=18;$k++){
                     $seats[] = [

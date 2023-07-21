@@ -10,8 +10,9 @@ class RegisterRequest extends ApiRequest
     {
         return [
             'name'=>['required','string'],
-            'phone_number'=>['required','size:11','unique:users,phone_number'],
+            'phone_number'=>['required','unique:users,phone_number','regex:/^\+7[\d]{10}/'],
             'password'=>['required','string'],
+            'agreement'=>['required']
         ];
     }
 
@@ -21,6 +22,7 @@ class RegisterRequest extends ApiRequest
             'name'=>'имя',
             'phone_number'=>'номер телефона',
             'password'=>'пароль',
+            'agreement'=>'согласие'
         ];
     }
 }

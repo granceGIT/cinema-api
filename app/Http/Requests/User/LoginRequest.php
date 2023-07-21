@@ -9,7 +9,7 @@ class LoginRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'phone_number'=>'required|string',
+            'phone_number'=>'required|string|regex:/^\+7[\d]{10}/',
             'password'=>'required|string',
         ];
     }

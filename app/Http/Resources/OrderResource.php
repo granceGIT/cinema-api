@@ -19,7 +19,6 @@ class OrderResource extends JsonResource
         return [
             'id'=>$this->id,
             'tickets_count'=>$this->tickets->count(),
-            'tickets_children_count'=>$this->tickets()->where('ticket_type_id',2)->get()->count(),
             'price'=>$this->price,
             'status'=>$this->status->name,
             'showing'=>new ShowingResource($this->showing),

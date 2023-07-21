@@ -15,9 +15,9 @@ use App\Http\Resources\OrderResource;
 use App\Http\Resources\UserResource;
 use App\Models\Film;
 use App\Models\Order;
+use App\Models\Seat;
 use App\Models\Showing;
 use App\Models\Ticket;
-use App\Models\TicketType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,15 +27,17 @@ class UserController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        if ($user = User::where([['phone_number', $request->phone_number], ['password', $request->password]])->first()) {
-            return JSONHelper::response(['token' => $user->generateToken()]);
+        if ($user = User::where('phone_number', $request->phone_number)->first()) {
+            if (Hash::check($request->password,$user->password)){
+                return JSONHelper::response(['token' => $user->generateToken()]);
+            }
         }
         throw new ApiException(401, 'Неверные данные');
     }
 
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated() + ['password_hashed' => Hash::make($request->password)]);
+        $user = User::create($request->except('password') + ['password' => Hash::make($request->password)]);
         return JSONHelper::response([
             'user_id' => $user->id,
             'token' => $user->generateToken(),
@@ -62,7 +64,7 @@ class UserController extends Controller
         $user = $request->user();
         return JSONHelper::response([
             'active' => OrderResource::collection($user->ordersByShowingDate('>=',now())->get()),
-            'previous' => OrderResource::collection($user->ordersByShowingDate('<',now())->get()),
+            'previous' => OrderResource::collection($user->ordersByShowingDate('<',now())->orderBy('created_at','desc')->get()),
         ]);
     }
 
@@ -77,6 +79,7 @@ class UserController extends Controller
             $order = Order::create([
                 'showing_id' => $request->showing_id,
                 'user_id' => $request->user()->id,
+                'price'=>$request->price
             ]);
 
             foreach ($request->tickets as $ticket) {
@@ -87,11 +90,10 @@ class UserController extends Controller
                 Ticket::create([
                     'seat_id' => $ticket['seat_id'],
                     'order_id' => $order->id,
-                    'ticket_type_id' => $ticket['ticket_type_id'],
                 ]);
 
-                $ticketType = TicketType::find($ticket['ticket_type_id']);
-                $price += $showing->base_price * $ticketType->price_ratio;
+                $seatType = Seat::find($ticket['seat_id'])->type;
+                $price += $showing->base_price * $seatType->price_ratio;
             }
 
             $order->update(['price' => $price]);

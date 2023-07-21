@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Seat;
 use Database\Factories\SeatFactory;
 use Illuminate\Database\Seeder;
@@ -19,7 +18,6 @@ class DatabaseSeeder extends Seeder
             GenreSeeder::class,
             HallSeeder::class,
             RoleSeeder::class,
-            TicketTypeSeeder::class,
             SeatTypeSeeder::class,
             UserSeeder::class,
             ActorSeeder::class,
@@ -32,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ActorFilmSeeder::class,
             FilmGenreSeeder::class,
             FilmRatingSeeder::class,
+            ImageSeeder::class,
         ]);
 
     }

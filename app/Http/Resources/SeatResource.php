@@ -19,7 +19,8 @@ class SeatResource extends JsonResource
             'seat_row'=>$this->seat_row,
             'seat_number'=>$this->seat_number,
             'seat_type'=>$this->type->name,
-            'is_occupied'=>$this->is_occupied
+            'is_occupied'=>$this->is_occupied,
+            'price_ratio'=>$this->type->price_ratio,
         ];
     }
 }

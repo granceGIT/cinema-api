@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->time('start_time');
-            $table->time('end_time');
             $table->integer('base_price');
 
             $table->foreignId('hall_id')->constrained('halls')->cascadeOnDelete()->cascadeOnUpdate();

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,35 +14,21 @@ class ActorFilmSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('actor_film')->insert([
-            [
-                'role'=>'Имя фамилия',
-                'actor_id'=>1,
-                'film_id'=>1,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'role'=>'Злодей',
-                'actor_id'=>2,
-                'film_id'=>1,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'role'=>'Герой',
-                'actor_id'=>5,
-                'film_id'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'role'=>'Добряк',
-                'actor_id'=>3,
-                'film_id'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+        $faker = Factory::create("ru_RU");
+
+        $filmActors = [];
+        for ($i=1;$i<=10;$i++){
+            for ($j=0;$j<3;$j++){
+                $filmActors[]=[
+                    'role'=>$faker->words(2,true),
+                    'actor_id'=>rand(1,6),
+                    'film_id'=>$i,
+                    'created_at'=>now(),
+                    'updated_at'=>now(),
+                ];
+            }
+        }
+
+        DB::table('actor_film')->insert($filmActors);
     }
 }

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\JSONHelper;
 use App\Http\Requests\Showing\FilterRequest;
 use App\Http\Resources\SeatResource;
+use App\Http\Resources\SeatTypeResource;
 use App\Http\Resources\ShowingResource;
+use App\Models\SeatType;
 use App\Models\Showing;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
@@ -14,11 +16,6 @@ class ShowingController extends Controller
 {
     public function index(FilterRequest $request)
     {
-//        if($request->search){
-//            $showings = Showing::withWhereHas('film',function(Builder $query) use($request){
-//                $query->where('name','like',"%{$request->search}%");
-//            });
-//        }
         $showings = Showing::orderBy('id');
         foreach ($request->validated() as $k => $v) {
             $showings->where($k, $v);
@@ -35,7 +32,8 @@ class ShowingController extends Controller
     {
         return (new ShowingResource($showing))->additional([
             'data' => [
-                'seats' => SeatResource::collection($showing->all_seats())
+                'seats' => SeatResource::collection($showing->all_seats()),
+                'seat_info'=> SeatTypeResource::collection(SeatType::all())
             ]
         ]);
     }

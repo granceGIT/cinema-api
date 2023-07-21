@@ -16,7 +16,6 @@ return new class extends Migration
 
             $table->foreignId('seat_id')->constrained('seats')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('order_id')->constrained('orders')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('ticket_type_id')->constrained('ticket_types')->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->timestamps();
         });

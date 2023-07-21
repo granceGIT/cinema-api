@@ -20,7 +20,6 @@ class TicketResource extends JsonResource
             "seat_row" => $this->seat->seat_row,
             "seat_number" => $this->seat->seat_number,
             "seat_type" => $this->seat->type->name,
-            "ticket_type" => $this->type->name,
         ];
     }
 }

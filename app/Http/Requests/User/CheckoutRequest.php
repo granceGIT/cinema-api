@@ -10,9 +10,9 @@ class CheckoutRequest extends ApiRequest
     {
         return [
             'showing_id'=>['required','exists:showings,id'],
+            'price'=>['nullable'],
             'tickets'=>['array'],
             'tickets.*.seat_id'=>['required','exists:seats,id','distinct:strict'],
-            'tickets.*.ticket_type_id'=>['required','exists:ticket_types,id']
         ];
     }
 }

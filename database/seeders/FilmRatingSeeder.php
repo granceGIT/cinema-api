@@ -13,28 +13,19 @@ class FilmRatingSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('film_rating')->insert([
-            [
-                'user_id'=>1,
-                'film_id'=>1,
-                'rate'=>5,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'user_id'=>2,
-                'film_id'=>1,
-                'rate'=>8,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'user_id'=>1,
-                'film_id'=>2,
-                'rate'=>9,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+        $filmRatings = [];
+        for ($i = 1; $i < 10; $i++) {
+            for ($j = 1; $j <= 2; $j++) {
+                $filmRatings[] = [
+                    'user_id' => $j,
+                    'film_id' => $i,
+                    'rate' => rand(4,9),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
+
+        DB::table('film_rating')->insert($filmRatings);
     }
 }

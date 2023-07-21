@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShowingResource extends JsonResource
+class SeatTypeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +15,9 @@ class ShowingResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'hall'=>$this->hall->name,
-            'date'=>$this->date,
-            'start_time'=>$this->start_time,
-            'film'=>new FilmResource($this->film),
+            "id"=>$this->id,
+            "name"=>$this->name,
+            "price_ratio"=>$this->price_ratio
         ];
     }
 }

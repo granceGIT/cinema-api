@@ -13,37 +13,18 @@ class FilmGenreSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('film_genre')->insert([
-            [
-                'film_id'=>1,
-                'genre_id'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'film_id'=>1,
-                'genre_id'=>7,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'film_id'=>2,
-                'genre_id'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'film_id'=>2,
-                'genre_id'=>3,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'film_id'=>2,
-                'genre_id'=>5,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+        $filmGenres = [];
+        for ($i=1;$i<=10;$i++){
+            for($j=0;$j<2;$j++){
+                $filmGenres[] = [
+                    'film_id'=>$i,
+                    'genre_id'=>rand(1,8),
+                    'created_at'=>now(),
+                    'updated_at'=>now(),
+                ];
+            }
+        }
+
+        DB::table('film_genre')->insert($filmGenres);
     }
 }
