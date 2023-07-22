@@ -5,9 +5,11 @@ API Кинотеатра, система проектировалась под �
 
 ## Установка
 Для того чтобы запустить проект необходимо скачать его на локальный диск и перейти к расположению
+Установить необходимые зависимости
 ```
 $ git clone https://github.com/granceGIT/cinema-api.git
 $ cd cinema-api
+$ composer install
 ```
 
 ## Запуск
@@ -33,9 +35,11 @@ There is also SPA using vue3.js: https://github.com/granceGIT/cinema_spa
 
 ## Installation
 First you need to clone project to local machine and go to location folder
+Intall dependencies
 ```
 $ git clone https://github.com/granceGIT/cinema-api.git
 $ cd cinema-api
+$ composer install
 ```
 
 ## Running
