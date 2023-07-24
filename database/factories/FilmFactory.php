@@ -16,6 +16,7 @@ class FilmFactory extends Factory
      */
     public function definition(): array
     {
+        // Не работает русская локализация неизвестно по какой причине. TODO: поискать варианты
         $faker = \Faker\Factory::create("ru_RU");
 
         return [

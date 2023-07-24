@@ -40,7 +40,7 @@ class Film extends Model
 
     public function upcomingShowings()
     {
-        return $this->showings()->where('date','>=',now());
+        return $this->showings()->where('date','>=',now())->orderBy('date')->orderBy('start_time');
     }
 
     public function rating()
