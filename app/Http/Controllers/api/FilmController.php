@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Film\FilterRequest;
+use App\Http\Resources\FilmCollection;
 use App\Http\Resources\FilmResource;
 use App\Http\Resources\FilmShowingsResource;
 use App\Models\Film;
@@ -26,12 +27,19 @@ class FilmController extends Controller
             });
         }
         if ($request->search) {
-            $films = $films->where('name', 'like', "%{$request->search}%");
+            $films->where('name', 'like', "%{$request->search}%");
         }
         foreach ($request->validated() as $k=>$v){
             $films->where($k,$v);
         }
-        return FilmResource::collection(($films->get()));
+        if ($request->limit){
+            $films = $films->paginate($request->limit)->withPath($request->url() . "?limit={$request->limit}");
+        }
+        else{
+            $films = $films->get();
+        }
+
+        return new FilmCollection($films);
     }
 
     public function popular()

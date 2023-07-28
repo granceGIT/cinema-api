@@ -17,8 +17,7 @@ class Film extends Model
         return Film::withWhereHas(
             'showings', function (Builder $query) {
             $query->where('date', '>=', now());
-        },
-        );
+        });
     }
 
     public static function popularBetweenDate($startDate, $endDate = new \DateTime())
@@ -40,7 +39,15 @@ class Film extends Model
 
     public function upcomingShowings()
     {
-        return $this->showings()->where('date','>=',now())->orderBy('date')->orderBy('start_time');
+        return $this->showings()
+            ->where('date', '>=', now())
+            ->orWhere(function ($query) {
+                $query->where('date', today())
+                    ->where('start_time', '>=', now())
+                    ->where('film_id',$this->id);
+            })
+            ->orderBy('date')
+            ->orderBy('start_time');
     }
 
     public function rating()

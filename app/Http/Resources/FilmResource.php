@@ -30,4 +30,6 @@ class FilmResource extends JsonResource
             'images'=>$this->images,
         ];
     }
+
+
 }
