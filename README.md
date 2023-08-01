@@ -1,7 +1,6 @@
 ## Информация
 API Кинотеатра, система проектировалась под макет и планируемый функционал. Возможно дальнейшее расширение функционала  
-Проект не закончен  
-К нему также разрабатывается SPA на VUE3.js: https://github.com/granceGIT/cinema_spa  
+К нему также есть SPA на VUE3.js: https://github.com/granceGIT/cinema_spa  
 
 ## Установка
 Для того чтобы запустить проект необходимо скачать его на локальный диск и перейти к расположению  
@@ -30,7 +29,6 @@ API будет доступен по адресу указанном в конс
 
 ## Information
 Cinema API  
-Project is currently beeing developed  
 There is also SPA using vue3.js: https://github.com/granceGIT/cinema_spa
 
 ## Installation

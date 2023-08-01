@@ -16,7 +16,11 @@ class Film extends Model
     {
         return Film::withWhereHas(
             'showings', function (Builder $query) {
-            $query->where('date', '>=', now());
+            $query->where('date', '>', today())
+                ->orWhere(function ($q) {
+                    $q->where('date', today())
+                        ->where('start_time', ">=", now()->format("H:i:s"));
+                });
         });
     }
 
@@ -42,9 +46,9 @@ class Film extends Model
         return $this->showings()
             ->where('date', '>=', now())
             ->orWhere(function ($query) {
-                $query->where('date', today())
+                $query->where('date', today()->toDate())
                     ->where('start_time', '>=', now())
-                    ->where('film_id',$this->id);
+                    ->where('film_id', $this->id);
             })
             ->orderBy('date')
             ->orderBy('start_time');

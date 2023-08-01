@@ -18,6 +18,7 @@ Route::controller(\App\Http\Controllers\api\FilmController::class)->group(functi
 
 Route::controller(\App\Http\Controllers\api\ShowingController::class)->group(function(){
     Route::get('/showings','index');
+    Route::get('/showings/closest','closest');
     Route::get('/showings/{showing}/seats/free','freeSeatsCount');
     Route::get('/showings/{showing}/seats','seats');
 });

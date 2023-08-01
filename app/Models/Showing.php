@@ -15,10 +15,21 @@ class Showing extends Model
         'updated_at',
     ];
 
+    public static function closest()
+    {
+        return self::with('film')
+            ->where('date', '>', today()->toDate())
+            ->orWhere(function ($query) {
+                $query->where('date', today())
+                    ->where('start_time', '>=', now()->format("H:i:s"));
+            })->orderBy('date')
+            ->orderBy('start_time');
+    }
+
     public function freeSeats()
     {
         $ticketSeatIds = $this->tickets->pluck('seat_id');
-        return $this->hall->seats()->whereNotIn('id',$ticketSeatIds);
+        return $this->hall->seats()->whereNotIn('id', $ticketSeatIds);
     }
 
     public function all_seats()

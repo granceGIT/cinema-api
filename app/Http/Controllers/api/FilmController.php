@@ -7,9 +7,10 @@ use App\Http\Requests\Film\FilterRequest;
 use App\Http\Resources\FilmCollection;
 use App\Http\Resources\FilmResource;
 use App\Http\Resources\FilmShowingsResource;
+use App\Http\Resources\ShowingResource;
 use App\Models\Film;
+use App\Models\Showing;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {

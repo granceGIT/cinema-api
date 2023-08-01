@@ -11,6 +11,7 @@ use App\Http\Resources\ShowingResource;
 use App\Models\SeatType;
 use App\Models\Showing;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class ShowingController extends Controller
 {
@@ -36,5 +37,11 @@ class ShowingController extends Controller
                 'seat_info'=> SeatTypeResource::collection(SeatType::all())
             ]
         ]);
+    }
+
+    public function closest(Request $request)
+    {
+        $limit = $request->limit ?? 3;
+        return ShowingResource::collection(Showing::closest()->limit($limit)->get());
     }
 }
